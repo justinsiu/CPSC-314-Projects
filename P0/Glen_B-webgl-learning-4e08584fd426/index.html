@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0046)http://www.ugrad.cs.ubc.ca/~cs314/Vjan2016/p0/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Project 0, CPSC 314 Jan 2016</title>
+  <script type="text/javascript" async="" src="./index_files/ga.js"></script></head>
+
+  <body>
+    <h3>Project 0, CPSC 314 Jan 2016</h3>
+
+<i>Out: Wed Jan 13 2016. Due: Tue Jan 19 2016, 11:59pm</i>
+
+<p> This preliminary project will get you started with the course, and
+has four parts. First, you'll make sure that your machine is set up
+with the infrastructure you need, including using either a text editor
+or an IDE to edit JavaScript, configuring your web browser to access
+local JavaScript files, version control (for example with git). You'll
+also want to check out the basics of JavaScript if you haven't used it
+before. Second, you'll get started with running an example
+WebGL/JavaScript program and making a few simple changes to it, and
+learning how to use your browser's JavaScript debugger to inspect and
+change the running program. Third, you will also read the academic
+conduct guidelines for the course and certify that you understand
+them. Fourth, you'll set up and test the handin command.
+
+</p><p>This preliminary "Project 0" is mandatory but not marked; we
+will not mark your Project 1 until we see that <tt>p0</tt> has been
+handed in as required below.
+
+<p></p>
+It's up to you whether to use your own laptop or the lab machines in CS Room
+005. We recommend making sure that you can work on both platforms. 
+
+</p><hr>
+
+<ol>
+  <li><b>Development Environment</b>
+	  <p><ul><li><b>Editing Code</b>
+		  <p>You will need to edit Javascript and HTML
+		  files on your machine. You have two choices: a standard text editor,
+		  or an IDE (Integrated Development Environment) like Eclipse.</p>
+		  
+		  <ul><li><b>Standard text editor</b>: You can simply edit Javascript and
+			  HTML files with your favorite text editor, reload the file in the
+			  browser to run the new code, and use the built-in debugging support
+			  in the browser. One popular multiplatform code editor is <a
+			  href="http://www.sublimetext.com/">sublime</a>. The default simple
+			  editors TextEdit for Macs and Notepad for Windows are also popular.
+			  Just remember that you should <b>never</b> try to use Microsoft Word
+			  for coding!</li>
+			  
+		  <p><li><b>IDE</b>: You can also can edit Javascript
+			  files through the Eclipse IDE, which should be familiar to you from
+			  working with Java files in previous courses. If you have not used Eclipse
+			  for Javascript before, see the <a href="http://www.htmlgoodies.com/html5/javascript/scripting-made-easier-with-the-eclipse-javascript-development-tools-jsdt.html#fbid=DWalsCdItAO">Getting Started in
+			  Eclipse with JavaScript</a> resource page.</li>
+		</ul>
+	</li><p><li><b>Web Browser</b>
+		<p>We recommend using either Chrome or Firefox. You may run
+		into compatability problems with Safari or Internet Explorer. 
+	</li><p><li><b>Running Local Code</b>
+
+		<p>Since JavaScript is typically sent
+		from a server, by default most web browsers do not allow
+		accessing JavaScript files stored on your local computer, for
+		security reasons. However, while you are developing WebGL/JS in
+		this course, you will find it very useful to be able to access
+		local files, for example JavaScript libraries! There are two
+		solutions.</p>
+		<p>The easiest option, which we recommend, is to simply enable
+		your browser to run local JavaScript. On Chrome in Linux, you
+		will need to start the program with the command-line flag
+		<tt>google-chrome --allow-file-access-from-files</tt>. 
+		On Mac OS quit Chrome and use the command <pre>open -a "Google Chrome" --args --allow-file-access-from-files</pre>. 
+		Here
+		are several pages with instructions on how to enable local file
+		access:</p>
+		<ul>
+		  <li><a
+			  href="https://github.com/mrdoob/three.js/wiki/How-to-run-things-locally">Three.js
+			  guide to running things locally</a> (multiple browsers)</li>
+			  
+		  <li>Chrome instructions from <a href="http://www.chrome-allow-file-access-from-file.com/">www.chrome-allow-file-access-from-file.com</a></li>
+		  <li>Another Chrome guide from <a href="http://voxelent.com/local-chrome/">voxelent</a></li>
+		  <li><a
+			  href="http://kb.mozillazine.org/Links_to_local_pages_do_not_work">Firefox
+			  instructions for running locally</a>.</li>
+		</ul>
+		
+		<p>The alternative solution is to install and run a web server on your
+		computer, such as WAMP or LAMP.</p>
+		
+		</li>
+			
+	</li>
+
+		<p><li><b>Version Control</b>
+			<p>We strongly recommend that you use
+			version control. It's particularly crucial for teams, but it's
+			highly desireable even if you're working individually. We recommend
+			<a href="https://git-scm.com/">git</a>, but you are welcome to use
+			another package if you prefer. 
+			<ul><li><a href="https://git-scm.com/downloads">Download git</a> and
+				install it if you do not already have git loaded on your
+				machine. If you will be using Eclipse, then download 	<a
+				href="http://www.eclipse.org/egit/download/">EGit</a> as well.</li> 
+			<li>We recommend using <a
+			href="https://bitbucket.org/">BitBucket</a> because it
+			allows you to make a private repo for free. Note that <a
+			href="https://github.com/">github</a> only allows public
+			repos if you're using it for free. (You do need to keep
+			your code for this course private!)
+			</li></ul>
+			
+		</li>
+			<p><li><b> JavaScript Basics</b>
+				<p>You will need to familiarize yourself with the basic
+				syntax of JavaScript. 
+				<ul><li><a href="https://www.codecademy.com/learn/javascript">JavaScript tutorial</a>,
+					reasonable place to start if you haven't used JavaScript at all before
+				<li><a href="https://autotelicum.github.io/Smooth-CoffeeScript/literate/js-intro.html">Compact description of JavaScript</a>, 
+					particularly good for people who have a solid understanding of Java already</li>
+				<li><a
+					href="http://javascriptissexy.com/category/16-important-javascript-concepts/">Important
+					concepts of JavaScript</a>, further reading on JavaScript </li>
+				<li><a href="http://www.w3schools.com/jsref/">JavaScript API</a></li> 
+			  </ul>
+	  </li></ul>
+			  
+	  <p><li><b>Example WebGL/JavaScript Code</b>
+
+			<p>The example code <a
+		  href="https://bitbucket.org/Glen_B/webgl-learning">PO
+		  Webgl-Sandbox</a> uses Physijs, which is a wrapper for the
+		  ammo.js project, which is a port of the Bullet physics
+		  library. </li>
+
+	  <ul><p><li><b>Download Files</b>
+		  <p>
+		  <ul><li>You can either <a
+		  href="https://git-scm.com/docs/git-clone">clone</a> the git
+		  repository, or just download the source (as a tar or zip
+		  file):
+			  <ul><li>to clone the repository on the command line, using the command <pre>git clone https://Glen_B@bitbucket.org/Glen_B/webgl-learning.git</pre>
+			  <li>or you can <a
+				  href="https://wiki.eclipse.org/EGit/User_Guide#Cloning_or_adding_Repositories">clone
+				  the repo using eclipse</a> </li>
+			  <li>or you can <a href="https://bitbucket.org/Glen_B/webgl-learning/get/master.tar.gz">download the repository</a> and unpack it with
+				  the command <tt>tar -xvzf </tt> <i>filename</i><tt>.tar.gz</tt>.
+			  </li>
+			</ul>
+	  </ul>
+  </li><p><li><b>Run Code</b>
+	  <ul>
+		<p><li>Load the file <tt>example/vehicle.html</tt> in your
+			browser. You should see a red car that you can drive forward
+			by pressing the up arrow key; turn using the left and right
+			arrow keys. The physics simulation includes collision and
+			friction computations: try crashing the car into the blocks
+			to see what happens! 
+			<p>This HTML file loads the JavaScript file
+		  <tt>examples/vehicle.js</tt> file that is loaded by
+			<tt>examples/vehicle.html</tt>.
+		</li></ul>
+
+	</li><p><li><b> Edit and Debug JavaScript</b>
+
+		<p> If you're using Eclipse, start it up and import the
+		project. If you're using a text editor, load the file into it.
+		Just reload the page in the browser to see the results of your
+		edits.
+		
+		<p>The debuggers in both Chrome and Firefox have very similar capabilities:
+		<ul>
+		  <li><a href="https://developer.chrome.com/devtools/docs/javascript-debugging">Debugging in Chrome</a></li>
+		  <li><a href="http://getfirebug.com/javascript">Debugging in Firefox</a></li> 
+		</ul>
+		
+		<p>	Try using the debugger built into your browser to do each of these operations:
+		<ul>
+		  <li>Setting breakpoints</li>
+		  <li>Stepping in and over</li>
+		  <li>Printing/showing values</li>
+		  <li>Changing variables</li>
+		</ul>
+		
+	</li>
+
+	</li><p><li><b> Make Changes </b></li>
+
+		<p> There are three primary code changes that you should make in <tt>example/vehicle.js</tt>. 
+		Search for the string "CHANGE", which marks the locations in the code
+		where you should make your edits. 
+		
+		<ol>
+		  <li>
+			  CHANGE: the force applied from the engine. Something
+		  like 3000 has an interesting effect. 
+		  </li>
+		  <li>
+			  CHANGE: the number of boxes in the simulation. Try decreasing to a
+			  small number, like 5. Try increasing to a large number, like 500, and
+			  notice how the simulation slows down. 
+		  </li>
+		  <li>
+			  CHANGE: Try adding some new geometry in the scene. For example,
+			  try using cones instead of boxes. Hint: you might want
+		  to reduce the number of cones!  
+		  </li>
+		</ol>
+
+	</li><p><li><b>Take Screenshot</b>
+		<p>Take a screenshot of the browser window after you have changed the number of
+		boxes in the simulation. Use the built-in capabilities of
+		your operating system (Linux, Mac, or Windows). Your
+		screenshot should be in PNG format. Instructions: 
+		<ul>
+		  <li><a href="http://windows.microsoft.com/en-ca/windows/take-screen-capture-print-screen#take-screen-capture-print-screen=windows-8">Windows screenshots</a>
+		  <li><a href="https://support.apple.com/en-ca/HT201361">Mac screenshots</a>
+		  <li><a href="http://www.thegeekstuff.com/2012/08/screenshot-ubuntu/">Linux screenshots</a>
+		</ul>
+  </ul>
+		</p><li><b>Academic Conduct Guidelines</b>
+
+    <p>
+    </p><ul> <li>Carefully read through the three pages that deal with plagiarism,
+    cheating, and academic misconduct:
+    <ul><li>Course-specific guidelines at <a href="http://www.ugrad.cs.ubc.ca/~cs314/Vjan2016/cheat.html">http://www.ugrad.cs.ubc.ca/~cs314/Vjan2016/cheat.html</a>
+        </li><li>Tamara's general discussion at <a href="http://www.cs.ubc.ca/~tmm/courses/cheat.html">http://www.cs.ubc.ca/~tmm/courses/cheat.html</a>
+        </li><li>Department guidelines at <a href="http://www.cs.ubc.ca/about/policies/collaboration.shtml">http://www.cs.ubc.ca/about/policies/collaboration.shtml</a>
+    </li></ul>
+    <li>As part of this lab, you will to confirm that you have read and understood these
+    guidelines. Ask Tamara right
+    away if you
+    have any questions, either on Piazza, by email, or in person. 
+    </li></ul>
+
+    <p>
+	</p></li><li><b>Handin</b>
+
+		<p>You will now set up and test the process of handing in your
+		project using the <tt>handin</tt> command.
+		
+		<ul><li>Make a new
+			directory called <tt>cs314</tt> in your home directory, and then
+			a subdirectory within that called <tt>p0</tt>. It's best to
+			have keep your working directories separate from your handin
+			directories, and just copy files over when you're ready to hand
+			things in.</li>
+			
+		<li> For this
+			assignment, you will only need to hand in four files.
+			<ul><li> A screenshot in png format of the simulation after it
+				has been modified with a different number of boxes</li>
+			<li>the JavaScript file vehicle.js (which should have
+				minor alterations)</li>
+			<li> the HTML file vehicle.html</li>
+			<li> a README.txt file that includes
+				<ul><li> name, account id (four or five characters), and
+					student number for every member of the team (or just you, if
+					you're working individually)</li>
+				<li>A very brief
+					description of what changes you made to the P0 source.</li>
+				<li> The statement
+					statement "I/we have read and understood the cheating policies at
+					http://www.ugrad.cs.ubc.ca/~cs314/Vjan2016/cheat.html".</li>
+			  </ul>
+		</ul>
+	</li><li> Hand in this project with the command <pre>handin cs314 p0</pre>
+		You do not need to be in any particular directory to run this
+		command; handin will automatically use the contents of
+		<tt>~/cs314/p0</tt> no matter what directory you are in when you
+		run it.
+		
+	</li><li> You can check what you have handed in at any time by simply
+		looking at the contents of the directory. You should also check
+		using <tt>handin -c</tt> to doublecheck that the handin was
+		successful. 
+	</li></ul>	
+
+</li></ul>
+</ol>
+    <hr>
+    <address><a href="http://www.ugrad.cs.ubc.ca/~cs314/Vjan2016/">CPSC 314 Jan 2016</a></address>
+</body></html>
+
