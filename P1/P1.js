@@ -90,7 +90,7 @@ var non_uniform_scale = new THREE.Matrix4().set(1.5,0,0,0, 0,1,0,0, 0,0,1,0.5, 0
 noseGeometry.applyMatrix(non_uniform_scale);
 
 var tailGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(0.5,0,0,0, 0,0.5,0,0, 0,0,8,-4, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(0.5,0,0,0, 0,0.5,0,0, 0,0,2,-1, 0,0,0,1);
 tailGeometry.applyMatrix(non_uniform_scale);
 
 var legGeometry = makeCube();
@@ -183,8 +183,10 @@ var tentLR9Matrix = new THREE.Matrix4().set(0,1,0,0.75, -1,0,0,-0.375, 0,0,1,1, 
 var tentLR9FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR9Matrix);
 
 
-var tailMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-2, 0,0,1,-4, 0,0,0,1);
-var tailFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
+var tail1Matrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-2, 0,0,1,-4, 0,0,0,1);
+var tail1FinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tail1Matrix);
+var tail2Matrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,1,-2, 0,0,0,1);
+var tail2FinalMatrix = new THREE.Matrix4().multiplyMatrices(tail1FinalMatrix,tail2Matrix);
 
 
 var legFLMatrix = new THREE.Matrix4().set(1,0,0,2.5, 0,1,0,-3, 0,0,1,3, 0,0,0,1);
@@ -338,9 +340,12 @@ var tentLR9 = new THREE.Mesh(tentLGeometry,normalMaterial);
 tentLR9.setMatrix(tentLR9FinalMatrix);
 scene.add(tentLR9);
 
-var tail = new THREE.Mesh(tailGeometry,normalMaterial);
-tail.setMatrix(tailFinalMatrix);
-scene.add(tail);
+var tail1 = new THREE.Mesh(tailGeometry,normalMaterial);
+tail1.setMatrix(tail1FinalMatrix);
+scene.add(tail1);
+var tail2 = new THREE.Mesh(tailGeometry,normalMaterial);
+tail2.setMatrix(tail2FinalMatrix);
+scene.add(tail2);
 
 var legFL = new THREE.Mesh(legGeometry,normalMaterial);
 legFL.setMatrix(legFLFinalMatrix);
@@ -537,8 +542,10 @@ function updateBody() {
       tentLR9.setMatrix(tentLR9RotMatrix);
 
 
-      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tailMatrix);
-      tail.setMatrix(tailRotMatrix);
+      var tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tail1Matrix);
+      tail1.setMatrix(tail1RotMatrix);
+      var tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,tail2Matrix);
+      tail2.setMatrix(tail2RotMatrix);
 
 
       var legFLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFLMatrix);
@@ -680,8 +687,10 @@ function updateBody() {
       var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR9Matrix);
       tentLR9.setMatrix(tentLR9RotMatrix);
 
-      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tailMatrix);
-      tail.setMatrix(tailRotMatrix);
+      var tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tail1Matrix);
+      tail1.setMatrix(tail1RotMatrix);
+      var tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,tail2Matrix);
+      tail2.setMatrix(tail2RotMatrix);
 
       var legFLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFLMatrix);
       legFL.setMatrix(legFLRotMatrix);
@@ -821,9 +830,12 @@ function updateBody() {
       tentLR9.setMatrix(tentLR9RotMatrix);
 
 
-      var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
-      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(setTailMatrix,rotateYNeg);
-      tail.setMatrix(tailRotMatrix);
+      var setTail1Matrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tail1Matrix);
+      var tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(setTail1Matrix,rotateYNeg);
+      tail1.setMatrix(tail1RotMatrix);
+      var tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,tail2Matrix);
+      tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail2RotMatrix,rotateYNeg);
+      tail2.setMatrix(tail2RotMatrix);
     break
 
     case(key == "G" && animate): // Head turn Left
@@ -902,9 +914,12 @@ function updateBody() {
       var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR9Matrix);
       tentLR9.setMatrix(tentLR9RotMatrix);
 
-      var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
-      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(setTailMatrix,rotateYNeg);
-      tail.setMatrix(tailRotMatrix);
+      var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tail1Matrix);
+      var tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(setTailMatrix,rotateYNeg);
+      tail1.setMatrix(tail1RotMatrix);
+      var tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,tail2Matrix);
+      tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail2RotMatrix,rotateYNeg);
+      tail2.setMatrix(tail2RotMatrix);
     break
 
     case(key == "T" && animate): // Tail turn right
@@ -923,9 +938,12 @@ function updateBody() {
                                             Math.sin(-p), 0,  Math.cos(-p), 0,
                                                 0,        0,      0,        1);
 
-      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
-      tailRotMatrix = new THREE.Matrix4().multiplyMatrices(tailRotMatrix,rotateY);
-      tail.setMatrix(tailRotMatrix);
+      var tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tail1Matrix);
+      tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,rotateY);
+      tail1.setMatrix(tail1RotMatrix);
+      var tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,tail2Matrix);
+      tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail2RotMatrix,rotateY);
+      tail2.setMatrix(tail2RotMatrix);
 
     break
 
@@ -945,9 +963,12 @@ function updateBody() {
                                             -Math.sin(-p), 0, Math.cos(-p), 0,
                                                  0,        0,     0,        1);
 
-      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
-      tailRotMatrix = new THREE.Matrix4().multiplyMatrices(tailRotMatrix,rotateY);
-      tail.setMatrix(tailRotMatrix);
+      var tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tail1Matrix);
+      tail1RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,rotateY);
+      tail1.setMatrix(tail1RotMatrix);
+      var tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail1RotMatrix,tail2Matrix);
+      tail2RotMatrix = new THREE.Matrix4().multiplyMatrices(tail2RotMatrix,rotateY);
+      tail2.setMatrix(tail2RotMatrix);
 
     break
 
