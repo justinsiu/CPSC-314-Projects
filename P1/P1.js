@@ -86,11 +86,11 @@ var non_uniform_scale = new THREE.Matrix4().set(3,0,0,0, 0,3,0,0, 0,0,3,1.5, 0,0
 headGeometry.applyMatrix(non_uniform_scale);
 
 var noseGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,1,0.5, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(1.5,0,0,0, 0,1,0,0, 0,0,1,0.5, 0,0,0,1);
 noseGeometry.applyMatrix(non_uniform_scale);
 
 var tailGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,8,-4, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(0.5,0,0,0, 0,0.5,0,0, 0,0,8,-4, 0,0,0,1);
 tailGeometry.applyMatrix(non_uniform_scale);
 
 var legGeometry = makeCube();
@@ -106,7 +106,7 @@ var non_uniform_scale = new THREE.Matrix4().set(0.25,0,0,0, 0,0.25,0,0, 0,0,1,0.
 clawGeometry.applyMatrix(non_uniform_scale);
 
 var tentLGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(0.125,0,0,0, 0,0.125,0,0, 0,0,1,0, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(0.125,0,0,0, 0,0.125,0,0, 0,0,1,0.5, 0,0,0,1);
 tentLGeometry.applyMatrix(non_uniform_scale);
 
 var tentSGeometry = makeCube();
@@ -125,17 +125,67 @@ var torsoFinalMatrix = torsoMatrix;
 
 var originMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
 
-var headMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,1, 0,0,1,4, 0,0,0,1);
+
+var headMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0.5, 0,0,1,4, 0,0,0,1);
 var headFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,headMatrix);
 
 var noseMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-0.5, 0,0,1,3, 0,0,0,1);
 var noseFinalMatrix = new THREE.Matrix4().multiplyMatrices(headFinalMatrix,noseMatrix);
+
+
 var tentSL1Matrix = new THREE.Matrix4().set(1,0,0,-0.125, 0,1,0,0.5, 0,0,1,1, 0,0,0,1);
 var tentSL1FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSL1Matrix);
-//var tentSL2Matrix
+var tentSL2Matrix = new THREE.Matrix4().set(-1,0,0,-0.125, 0,-1,0,-0.5, 0,0,1,1, 0,0,0,1);
+var tentSL2FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSL2Matrix);
+
+var tentLL1Matrix = new THREE.Matrix4().set(1,0,0,-0.375, 0,1,0,0.5, 0,0,1,1, 0,0,0,1)
+var tentLL1FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL1Matrix);
+var tentLL2Matrix = new THREE.Matrix4().set(-1,0,0,-0.375, 0,-1,0,-0.5, 0,0,1,1, 0,0,0,1);
+var tentLL2FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL2Matrix);
+var tentLL3Matrix = new THREE.Matrix4().set(1,0,0,-0.625, 0,1,0,0.5, 0,0,1,1, 0,0,0,1)
+var tentLL3FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL3Matrix);
+var tentLL4Matrix = new THREE.Matrix4().set(-1,0,0,-0.625, 0,-1,0,-0.5, 0,0,1,1, 0,0,0,1);
+var tentLL4FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL4Matrix);
+var tentLL5Matrix = new THREE.Matrix4().set(0,-1,0,-0.75, 1,0,0,0.375, 0,0,1,1, 0,0,0,1);
+var tentLL5FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL5Matrix);
+var tentLL6Matrix = new THREE.Matrix4().set(0,-1,0,-0.75, 1,0,0,0.1875, 0,0,1,1, 0,0,0,1);
+var tentLL6FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL6Matrix);
+var tentLL7Matrix = new THREE.Matrix4().set(0,-1,0,-0.75, 1,0,0,0, 0,0,1,1, 0,0,0,1);
+var tentLL7FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL7Matrix);
+var tentLL8Matrix = new THREE.Matrix4().set(0,-1,0,-0.75, 1,0,0,-0.1875, 0,0,1,1, 0,0,0,1);
+var tentLL8FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL8Matrix);
+var tentLL9Matrix = new THREE.Matrix4().set(0,-1,0,-0.75, 1,0,0,-0.375, 0,0,1,1, 0,0,0,1);
+var tentLL9FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL9Matrix);
+
+
+var tentSR1Matrix = new THREE.Matrix4().set(1,0,0,0.125, 0,1,0,0.5, 0,0,1,1, 0,0,0,1);
+var tentSR1FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSR1Matrix);
+var tentSR2Matrix = new THREE.Matrix4().set(-1,0,0,0.125, 0,-1,0,-0.5, 0,0,1,1, 0,0,0,1);
+var tentSR2FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSR2Matrix);
+
+var tentLR1Matrix = new THREE.Matrix4().set(1,0,0,0.375, 0,1,0,0.5, 0,0,1,1, 0,0,0,1)
+var tentLR1FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR1Matrix);
+var tentLR2Matrix = new THREE.Matrix4().set(-1,0,0,0.375, 0,-1,0,-0.5, 0,0,1,1, 0,0,0,1);
+var tentLR2FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR2Matrix);
+var tentLR3Matrix = new THREE.Matrix4().set(1,0,0,0.625, 0,1,0,0.5, 0,0,1,1, 0,0,0,1)
+var tentLR3FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR3Matrix);
+var tentLR4Matrix = new THREE.Matrix4().set(-1,0,0,0.625, 0,-1,0,-0.5, 0,0,1,1, 0,0,0,1);
+var tentLR4FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR4Matrix);
+var tentLR5Matrix = new THREE.Matrix4().set(0,1,0,0.75, -1,0,0,0.375, 0,0,1,1, 0,0,0,1);
+var tentLR5FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR5Matrix);
+var tentLR6Matrix = new THREE.Matrix4().set(0,1,0,0.75, -1,0,0,0.1875, 0,0,1,1, 0,0,0,1);
+var tentLR6FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR6Matrix);
+var tentLR7Matrix = new THREE.Matrix4().set(0,1,0,0.75, -1,0,0,0, 0,0,1,1, 0,0,0,1);
+var tentLR7FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR7Matrix);
+var tentLR8Matrix = new THREE.Matrix4().set(0,1,0,0.75, -1,0,0,-0.1875, 0,0,1,1, 0,0,0,1);
+var tentLR8FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR8Matrix);
+var tentLR9Matrix = new THREE.Matrix4().set(0,1,0,0.75, -1,0,0,-0.375, 0,0,1,1, 0,0,0,1);
+var tentLR9FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR9Matrix);
+
 
 var tailMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-2, 0,0,1,-4, 0,0,0,1);
 var tailFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
+
 
 var legFLMatrix = new THREE.Matrix4().set(1,0,0,2.5, 0,1,0,-3, 0,0,1,3, 0,0,0,1);
 var legFLFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legFLMatrix);
@@ -152,6 +202,7 @@ var clawFL4FinalMatrix = new THREE.Matrix4().multiplyMatrices(pawFLFinalMatrix, 
 var clawFL5Matrix = new THREE.Matrix4().set(1,0,0,1.125, 0,1,0,-.25, 0,0,1,1, 0,0,0,1);
 var clawFL5FinalMatrix = new THREE.Matrix4().multiplyMatrices(pawFLFinalMatrix, clawFL5Matrix);
 
+
 var legFRMatrix = new THREE.Matrix4().set(1,0,0,-2.5, 0,1,0,-3, 0,0,1,3, 0,0,0,1);
 var legFRFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legFRMatrix);
 var pawFRMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-1, 0,0,1,0, 0,0,0,1);
@@ -167,6 +218,7 @@ var clawFR4FinalMatrix = new THREE.Matrix4().multiplyMatrices(pawFRFinalMatrix, 
 var clawFR5Matrix = new THREE.Matrix4().set(1,0,0,1.125, 0,1,0,-.25, 0,0,1,1, 0,0,0,1);
 var clawFR5FinalMatrix = new THREE.Matrix4().multiplyMatrices(pawFRFinalMatrix, clawFR5Matrix);
 
+
 var legRLMatrix = new THREE.Matrix4().set(1,0,0,2.5, 0,1,0,-3, 0,0,1,-3, 0,0,0,1);
 var legRLFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legRLMatrix);
 var pawRLMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-1, 0,0,1,0, 0,0,0,1);
@@ -181,6 +233,7 @@ var clawRL4Matrix = new THREE.Matrix4().set(1,0,0,0.5, 0,1,0,-.25, 0,0,1,1.5, 0,
 var clawRL4FinalMatrix = new THREE.Matrix4().multiplyMatrices(pawRLFinalMatrix, clawRL4Matrix);
 var clawRL5Matrix = new THREE.Matrix4().set(1,0,0,1.125, 0,1,0,-.25, 0,0,1,1, 0,0,0,1);
 var clawRL5FinalMatrix = new THREE.Matrix4().multiplyMatrices(pawRLFinalMatrix, clawRL5Matrix);
+
 
 var legRRMatrix = new THREE.Matrix4().set(1,0,0,-2.5, 0,1,0,-3, 0,0,1,-3, 0,0,0,1);
 var legRRFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legRRMatrix);
@@ -214,9 +267,76 @@ scene.add(head);
 var nose = new THREE.Mesh(noseGeometry,normalMaterial);
 nose.setMatrix(noseFinalMatrix);
 scene.add(nose);
+
 var tentSL1 = new THREE.Mesh(tentSGeometry,normalMaterial);
 tentSL1.setMatrix(tentSL1FinalMatrix);
 scene.add(tentSL1);
+var tentSL2 = new THREE.Mesh(tentSGeometry,normalMaterial);
+tentSL2.setMatrix(tentSL2FinalMatrix);
+scene.add(tentSL2);
+
+var tentLL1 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL1.setMatrix(tentLL1FinalMatrix);
+scene.add(tentLL1);
+var tentLL2 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL2.setMatrix(tentLL2FinalMatrix);
+scene.add(tentLL2);
+var tentLL3 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL3.setMatrix(tentLL3FinalMatrix);
+scene.add(tentLL3);
+var tentLL4 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL4.setMatrix(tentLL4FinalMatrix);
+scene.add(tentLL4);
+var tentLL5 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL5.setMatrix(tentLL5FinalMatrix);
+scene.add(tentLL5);
+var tentLL6 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL6.setMatrix(tentLL6FinalMatrix);
+scene.add(tentLL6);
+var tentLL7 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL7.setMatrix(tentLL7FinalMatrix);
+scene.add(tentLL7);
+var tentLL8 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL8.setMatrix(tentLL8FinalMatrix);
+scene.add(tentLL8);
+var tentLL9 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLL9.setMatrix(tentLL9FinalMatrix);
+scene.add(tentLL9);
+
+var tentSR1 = new THREE.Mesh(tentSGeometry,normalMaterial);
+tentSR1.setMatrix(tentSR1FinalMatrix);
+scene.add(tentSR1);
+var tentSR2 = new THREE.Mesh(tentSGeometry,normalMaterial);
+tentSR2.setMatrix(tentSR2FinalMatrix);
+scene.add(tentSR2);
+
+var tentLR1 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR1.setMatrix(tentLR1FinalMatrix);
+scene.add(tentLR1);
+var tentLR2 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR2.setMatrix(tentLR2FinalMatrix);
+scene.add(tentLR2);
+var tentLR3 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR3.setMatrix(tentLR3FinalMatrix);
+scene.add(tentLR3);
+var tentLR4 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR4.setMatrix(tentLR4FinalMatrix);
+scene.add(tentLR4);
+var tentLR5 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR5.setMatrix(tentLR5FinalMatrix);
+scene.add(tentLR5);
+var tentLR6 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR6.setMatrix(tentLR6FinalMatrix);
+scene.add(tentLR6);
+var tentLR7 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR7.setMatrix(tentLR7FinalMatrix);
+scene.add(tentLR7);
+var tentLR8 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR8.setMatrix(tentLR8FinalMatrix);
+scene.add(tentLR8);
+var tentLR9 = new THREE.Mesh(tentLGeometry,normalMaterial);
+tentLR9.setMatrix(tentLR9FinalMatrix);
+scene.add(tentLR9);
 
 var tail = new THREE.Mesh(tailGeometry,normalMaterial);
 tail.setMatrix(tailFinalMatrix);
@@ -362,13 +482,64 @@ function updateBody() {
       var torsoRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,rotateZ);
       torso.setMatrix(torsoRotMatrix); 
 
+
       var headRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,headMatrix);
-      head.setMatrix(headFinalMatrix);
+      head.setMatrix(headRotMatrix);
       var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
       nose.setMatrix(noseRotMatrix);
 
+      var tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL1Matrix);
+      tentSL1.setMatrix(tentSL1RotMatrix);
+      var tentSL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL2Matrix);
+      tentSL2.setMatrix(tentSL2RotMatrix);
+
+      var tentLL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL1Matrix);
+      tentLL1.setMatrix(tentLL1RotMatrix);
+      var tentLL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL2Matrix);
+      tentLL2.setMatrix(tentLL2RotMatrix);
+      var tentLL3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL3Matrix);
+      tentLL3.setMatrix(tentLL3RotMatrix);
+      var tentLL4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL4Matrix);
+      tentLL4.setMatrix(tentLL4RotMatrix);
+      var tentLL5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL5Matrix);
+      tentLL5.setMatrix(tentLL5RotMatrix);
+      var tentLL6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL6Matrix);
+      tentLL6.setMatrix(tentLL6RotMatrix);
+      var tentLL7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL7Matrix);
+      tentLL7.setMatrix(tentLL7RotMatrix);
+      var tentLL8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL8Matrix);
+      tentLL8.setMatrix(tentLL8RotMatrix);
+      var tentLL9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL9Matrix);
+      tentLL9.setMatrix(tentLL9RotMatrix);
+
+      var tentSR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR1Matrix);
+      tentSR1.setMatrix(tentSR1RotMatrix);
+      var tentSR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR2Matrix);
+      tentSR2.setMatrix(tentSR2RotMatrix);
+
+      var tentLR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR1Matrix);
+      tentLR1.setMatrix(tentLR1RotMatrix);
+      var tentLR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR2Matrix);
+      tentLR2.setMatrix(tentLR2RotMatrix);
+      var tentLR3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR3Matrix);
+      tentLR3.setMatrix(tentLR3RotMatrix);
+      var tentLR4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR4Matrix);
+      tentLR4.setMatrix(tentLR4RotMatrix);
+      var tentLR5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR5Matrix);
+      tentLR5.setMatrix(tentLR5RotMatrix);
+      var tentLR6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR6Matrix);
+      tentLR6.setMatrix(tentLR6RotMatrix);
+      var tentLR7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR7Matrix);
+      tentLR7.setMatrix(tentLR7RotMatrix);
+      var tentLR8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR8Matrix);
+      tentLR8.setMatrix(tentLR8RotMatrix);
+      var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR9Matrix);
+      tentLR9.setMatrix(tentLR9RotMatrix);
+
+
       var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tailMatrix);
       tail.setMatrix(tailRotMatrix);
+
 
       var legFLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFLMatrix);
       legFL.setMatrix(legFLRotMatrix);
@@ -385,6 +556,7 @@ function updateBody() {
       var clawFL5RotMatrix = new THREE.Matrix4().multiplyMatrices(pawFLRotMatrix,clawFL5Matrix);
       clawFL5.setMatrix(clawFL5RotMatrix);
 
+
       var legFRRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFRMatrix);
       legFR.setMatrix(legFRRotMatrix);
       var pawFRRotMatrix = new THREE.Matrix4().multiplyMatrices(legFRRotMatrix,pawFRMatrix);
@@ -400,6 +572,7 @@ function updateBody() {
       var clawFR5RotMatrix = new THREE.Matrix4().multiplyMatrices(pawFRRotMatrix,clawFR5Matrix);
       clawFR5.setMatrix(clawFR5RotMatrix);
 
+
       var legRLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legRLMatrix);
       legRL.setMatrix(legRLRotMatrix);
       var pawRLRotMatrix = new THREE.Matrix4().multiplyMatrices(legRLRotMatrix,pawRLMatrix);
@@ -414,6 +587,7 @@ function updateBody() {
       clawRL4.setMatrix(clawRL4RotMatrix);
       var clawRL5RotMatrix = new THREE.Matrix4().multiplyMatrices(pawRLRotMatrix,clawRL5Matrix);
       clawRL5.setMatrix(clawRL5RotMatrix);
+
 
       var legRRRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legRRMatrix);
       legRR.setMatrix(legRRRotMatrix);
@@ -457,6 +631,54 @@ function updateBody() {
       head.setMatrix(headRotMatrix);
       var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
       nose.setMatrix(noseRotMatrix);
+
+      var tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL1Matrix);
+      tentSL1.setMatrix(tentSL1RotMatrix);
+      var tentSL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL2Matrix);
+      tentSL2.setMatrix(tentSL2RotMatrix);
+
+      var tentLL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL1Matrix);
+      tentLL1.setMatrix(tentLL1RotMatrix);
+      var tentLL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL2Matrix);
+      tentLL2.setMatrix(tentLL2RotMatrix);
+      var tentLL3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL3Matrix);
+      tentLL3.setMatrix(tentLL3RotMatrix);
+      var tentLL4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL4Matrix);
+      tentLL4.setMatrix(tentLL4RotMatrix);
+      var tentLL5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL5Matrix);
+      tentLL5.setMatrix(tentLL5RotMatrix);
+      var tentLL6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL6Matrix);
+      tentLL6.setMatrix(tentLL6RotMatrix);
+      var tentLL7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL7Matrix);
+      tentLL7.setMatrix(tentLL7RotMatrix);
+      var tentLL8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL8Matrix);
+      tentLL8.setMatrix(tentLL8RotMatrix);
+      var tentLL9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL9Matrix);
+      tentLL9.setMatrix(tentLL9RotMatrix);
+
+      var tentSR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR1Matrix);
+      tentSR1.setMatrix(tentSR1RotMatrix);
+      var tentSR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR2Matrix);
+      tentSR2.setMatrix(tentSR2RotMatrix);
+
+      var tentLR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR1Matrix);
+      tentLR1.setMatrix(tentLR1RotMatrix);
+      var tentLR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR2Matrix);
+      tentLR2.setMatrix(tentLR2RotMatrix);
+      var tentLR3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR3Matrix);
+      tentLR3.setMatrix(tentLR3RotMatrix);
+      var tentLR4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR4Matrix);
+      tentLR4.setMatrix(tentLR4RotMatrix);
+      var tentLR5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR5Matrix);
+      tentLR5.setMatrix(tentLR5RotMatrix);
+      var tentLR6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR6Matrix);
+      tentLR6.setMatrix(tentLR6RotMatrix);
+      var tentLR7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR7Matrix);
+      tentLR7.setMatrix(tentLR7RotMatrix);
+      var tentLR8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR8Matrix);
+      tentLR8.setMatrix(tentLR8RotMatrix);
+      var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR9Matrix);
+      tentLR9.setMatrix(tentLR9RotMatrix);
 
       var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tailMatrix);
       tail.setMatrix(tailRotMatrix);
@@ -550,6 +772,55 @@ function updateBody() {
       var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
       nose.setMatrix(noseRotMatrix);
 
+      var tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL1Matrix);
+      tentSL1.setMatrix(tentSL1RotMatrix);
+      var tentSL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL2Matrix);
+      tentSL2.setMatrix(tentSL2RotMatrix);
+
+      var tentLL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL1Matrix);
+      tentLL1.setMatrix(tentLL1RotMatrix);
+      var tentLL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL2Matrix);
+      tentLL2.setMatrix(tentLL2RotMatrix);
+      var tentLL3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL3Matrix);
+      tentLL3.setMatrix(tentLL3RotMatrix);
+      var tentLL4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL4Matrix);
+      tentLL4.setMatrix(tentLL4RotMatrix);
+      var tentLL5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL5Matrix);
+      tentLL5.setMatrix(tentLL5RotMatrix);
+      var tentLL6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL6Matrix);
+      tentLL6.setMatrix(tentLL6RotMatrix);
+      var tentLL7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL7Matrix);
+      tentLL7.setMatrix(tentLL7RotMatrix);
+      var tentLL8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL8Matrix);
+      tentLL8.setMatrix(tentLL8RotMatrix);
+      var tentLL9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL9Matrix);
+      tentLL9.setMatrix(tentLL9RotMatrix);
+
+      var tentSR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR1Matrix);
+      tentSR1.setMatrix(tentSR1RotMatrix);
+      var tentSR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR2Matrix);
+      tentSR2.setMatrix(tentSR2RotMatrix);
+
+      var tentLR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR1Matrix);
+      tentLR1.setMatrix(tentLR1RotMatrix);
+      var tentLR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR2Matrix);
+      tentLR2.setMatrix(tentLR2RotMatrix);
+      var tentLR3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR3Matrix);
+      tentLR3.setMatrix(tentLR3RotMatrix);
+      var tentLR4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR4Matrix);
+      tentLR4.setMatrix(tentLR4RotMatrix);
+      var tentLR5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR5Matrix);
+      tentLR5.setMatrix(tentLR5RotMatrix);
+      var tentLR6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR6Matrix);
+      tentLR6.setMatrix(tentLR6RotMatrix);
+      var tentLR7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR7Matrix);
+      tentLR7.setMatrix(tentLR7RotMatrix);
+      var tentLR8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR8Matrix);
+      tentLR8.setMatrix(tentLR8RotMatrix);
+      var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR9Matrix);
+      tentLR9.setMatrix(tentLR9RotMatrix);
+
+
       var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
       var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(setTailMatrix,rotateYNeg);
       tail.setMatrix(tailRotMatrix);
@@ -582,6 +853,54 @@ function updateBody() {
       head.setMatrix(headRotMatrix);
       var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
       nose.setMatrix(noseRotMatrix);
+
+      var tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL1Matrix);
+      tentSL1.setMatrix(tentSL1RotMatrix);
+      var tentSL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSL2Matrix);
+      tentSL2.setMatrix(tentSL2RotMatrix);
+
+      var tentLL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL1Matrix);
+      tentLL1.setMatrix(tentLL1RotMatrix);
+      var tentLL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL2Matrix);
+      tentLL2.setMatrix(tentLL2RotMatrix);
+      var tentLL3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL3Matrix);
+      tentLL3.setMatrix(tentLL3RotMatrix);
+      var tentLL4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL4Matrix);
+      tentLL4.setMatrix(tentLL4RotMatrix);
+      var tentLL5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL5Matrix);
+      tentLL5.setMatrix(tentLL5RotMatrix);
+      var tentLL6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL6Matrix);
+      tentLL6.setMatrix(tentLL6RotMatrix);
+      var tentLL7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL7Matrix);
+      tentLL7.setMatrix(tentLL7RotMatrix);
+      var tentLL8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL8Matrix);
+      tentLL8.setMatrix(tentLL8RotMatrix);
+      var tentLL9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLL9Matrix);
+      tentLL9.setMatrix(tentLL9RotMatrix);
+
+      var tentSR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR1Matrix);
+      tentSR1.setMatrix(tentSR1RotMatrix);
+      var tentSR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentSR2Matrix);
+      tentSR2.setMatrix(tentSR2RotMatrix);
+
+      var tentLR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR1Matrix);
+      tentLR1.setMatrix(tentLR1RotMatrix);
+      var tentLR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR2Matrix);
+      tentLR2.setMatrix(tentLR2RotMatrix);
+      var tentLR3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR3Matrix);
+      tentLR3.setMatrix(tentLR3RotMatrix);
+      var tentLR4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR4Matrix);
+      tentLR4.setMatrix(tentLR4RotMatrix);
+      var tentLR5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR5Matrix);
+      tentLR5.setMatrix(tentLR5RotMatrix);
+      var tentLR6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR6Matrix);
+      tentLR6.setMatrix(tentLR6RotMatrix);
+      var tentLR7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR7Matrix);
+      tentLR7.setMatrix(tentLR7RotMatrix);
+      var tentLR8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR8Matrix);
+      tentLR8.setMatrix(tentLR8RotMatrix);
+      var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseRotMatrix,tentLR9Matrix);
+      tentLR9.setMatrix(tentLR9RotMatrix);
 
       var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
       var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(setTailMatrix,rotateYNeg);
@@ -651,6 +970,72 @@ function updateBody() {
       var tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSL1Matrix);
       tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(tentSL1RotMatrix,rotateY);
       tentSL1.setMatrix(tentSL1RotMatrix);
+      var tentSL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSL2Matrix);
+      tentSL2RotMatrix = new THREE.Matrix4().multiplyMatrices(tentSL2RotMatrix,rotateY);
+      tentSL2.setMatrix(tentSL2RotMatrix);
+
+      var tentLL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL1Matrix);
+      tentLL1RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL1RotMatrix,rotateY);
+      tentLL1.setMatrix(tentLL1RotMatrix);
+      var tentLL2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL2Matrix);
+      tentLL2RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL2RotMatrix,rotateY);
+      tentLL2.setMatrix(tentLL2RotMatrix);
+      var tentLL3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL3Matrix);
+      tentLL3RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL3RotMatrix,rotateY);
+      tentLL3.setMatrix(tentLL3RotMatrix);
+      var tentLL4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL4Matrix);
+      tentLL4RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL4RotMatrix,rotateY);
+      tentLL4.setMatrix(tentLL4RotMatrix);
+      var tentLL5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL5Matrix);
+      tentLL5RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL5RotMatrix,rotateY);
+      tentLL5.setMatrix(tentLL5RotMatrix);
+      var tentLL6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL6Matrix);
+      tentLL6RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL6RotMatrix,rotateY);
+      tentLL6.setMatrix(tentLL6RotMatrix);
+      var tentLL7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL7Matrix);
+      tentLL7RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL7RotMatrix,rotateY);
+      tentLL7.setMatrix(tentLL7RotMatrix);
+      var tentLL8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL8Matrix);
+      tentLL8RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL8RotMatrix,rotateY);
+      tentLL8.setMatrix(tentLL8RotMatrix);
+      var tentLL9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLL9Matrix);
+      tentLL9RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLL9RotMatrix,rotateY);
+      tentLL9.setMatrix(tentLL9RotMatrix);
+
+      var tentSR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSR1Matrix);
+      tentSR1RotMatrix = new THREE.Matrix4().multiplyMatrices(tentSR1RotMatrix,rotateY);
+      tentSR1.setMatrix(tentSR1RotMatrix);
+      var tentSR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSR2Matrix);
+      tentSR2RotMatrix = new THREE.Matrix4().multiplyMatrices(tentSR2RotMatrix,rotateY);
+      tentSR2.setMatrix(tentSR2RotMatrix);
+
+      var tentLR1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR1Matrix);
+      tentLR1RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR1RotMatrix,rotateY);
+      tentLR1.setMatrix(tentLR1RotMatrix);
+      var tentLR2RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR2Matrix);
+      tentLR2RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR2RotMatrix,rotateY);
+      tentLR2.setMatrix(tentLR2RotMatrix);
+      var tentLR3RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR3Matrix);
+      tentLR3RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR3RotMatrix,rotateY);
+      tentLR3.setMatrix(tentLR3RotMatrix);
+      var tentLR4RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR4Matrix);
+      tentLR4RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR4RotMatrix,rotateY);
+      tentLR4.setMatrix(tentLR4RotMatrix);
+      var tentLR5RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR5Matrix);
+      tentLR5RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR5RotMatrix,rotateY);
+      tentLR5.setMatrix(tentLR5RotMatrix);
+      var tentLR6RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR6Matrix);
+      tentLR6RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR6RotMatrix,rotateY);
+      tentLR6.setMatrix(tentLR6RotMatrix);
+      var tentLR7RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR7Matrix);
+      tentLR7RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR7RotMatrix,rotateY);
+      tentLR7.setMatrix(tentLR7RotMatrix);
+      var tentLR8RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR8Matrix);
+      tentLR8RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR8RotMatrix,rotateY);
+      tentLR8.setMatrix(tentLR8RotMatrix);
+      var tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentLR9Matrix);
+      tentLR9RotMatrix = new THREE.Matrix4().multiplyMatrices(tentLR9RotMatrix,rotateY);
+      tentLR9.setMatrix(tentLR9RotMatrix);
 
     break
 
@@ -665,10 +1050,10 @@ function updateBody() {
 
       p = (p1 - p0)*((time-time_start)/time_length) + p0; // current frame 
 
-      var rotateZ = new THREE.Matrix4().set(1,     0,             0,        0, 
-                                            0, Math.cos(-p), -Math.sin(-p), 0, 
-                                            0, Math.sin(-p),  Math.cos(-p), 0,
-                                            0,     0,             0,        1);
+      var rotateZ = new THREE.Matrix4().set(1,      0,            0,        0, 
+                                            0,  Math.cos(-p), Math.sin(-p), 0, 
+                                            0, -Math.sin(-p), Math.cos(-p), 0,
+                                            0,      0,            0,        1);
 
       var pawFLRotMatrix = new THREE.Matrix4().multiplyMatrices(pawFLFinalMatrix,rotateZ);
       pawFL.setMatrix(pawFLRotMatrix);
