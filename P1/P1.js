@@ -82,10 +82,12 @@ torsoGeometry.applyMatrix(non_uniform_scale);
 // Hint: Explicity declare new matrices using Matrix4().set     
 
 var headGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(3,0,0,0, 0,3,0,0, 0,0,3,0, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(3,0,0,0, 0,3,0,0, 0,0,3,1.5, 0,0,0,1);
 headGeometry.applyMatrix(non_uniform_scale);
 
-
+var noseGeometry = makeCube();
+var non_uniform_scale = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,2,1, 0,0,0,1);
+noseGeometry.applyMatrix(non_uniform_scale);
 
 // MATRICES
 var torsoMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,2.5, 0,0,1,0, 0,0,0,1);
@@ -95,8 +97,11 @@ var torsoMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,2.5, 0,0,1,0, 0,0,0,1);
 // Hint: Keep hierarchies in mind!   
 // Hint: Play around with the TorsoMatrix values, what changes in the render? Why?
 
-var headMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,1, 0,0,1,5, 0,0,0,1);
+var headMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,1, 0,0,1,4, 0,0,0,1);
 var headFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,headMatrix);
+
+var noseMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-0.5, 0,0,1,3, 0,0,0,1);
+var noseFinalMatrix = new THREE.Matrix4().multiplyMatrices(headFinalMatrix,noseMatrix);
 
 
 // CREATE BODY
@@ -112,6 +117,9 @@ var head = new THREE.Mesh(headGeometry,normalMaterial);
 head.setMatrix(headFinalMatrix);
 scene.add(head);
 
+var nose = new THREE.Mesh(noseGeometry,normalMaterial);
+nose.setMatrix(noseFinalMatrix);
+scene.add(nose);
 
 // APPLY DIFFERENT JUMP CUTS/ANIMATIONS TO DIFFERNET KEYS
 // Note: The start of "U" animation has been done for you, you must implement the hiearchy and jumpcut.
@@ -128,6 +136,7 @@ var time_start; // start time of animation
 var time_end; // end time of animation
 var p; // current frame
 var animate = false; // animate?
+var jumpcut = false; // jumpcut 
 
 // function init_animation()
 // Initializes parameters and sets animate flag to true.
@@ -163,6 +172,9 @@ function updateBody() {
 
       var torsoRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,rotateZ);
       torso.setMatrix(torsoRotMatrix); 
+
+      var headFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,headMatrix);
+      head.setMatrix(headFinalMatrix);
       break
 
       // TO-DO: IMPLEMENT JUMPCUT/ANIMATION FOR EACH KEY!
