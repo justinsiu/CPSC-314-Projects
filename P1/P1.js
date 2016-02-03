@@ -111,6 +111,8 @@ var torsoMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,2.5, 0,0,1,0, 0,0,0,1);
 // Hint: Keep hierarchies in mind!   
 // Hint: Play around with the TorsoMatrix values, what changes in the render? Why?
 
+var originMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1);
+
 var headMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,1, 0,0,1,4, 0,0,0,1);
 var headFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,headMatrix);
 
@@ -122,19 +124,23 @@ var tailFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatri
 
 var legFLMatrix = new THREE.Matrix4().set(1,0,0,2.5, 0,1,0,-3, 0,0,1,2, 0,0,0,1);
 var legFLFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legFLMatrix);
-
 var pawFLMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-1, 0,0,1,0, 0,0,0,1);
 var pawFLFinalMatrix = new THREE.Matrix4().multiplyMatrices(legFLFinalMatrix,pawFLMatrix);
 
 var legFRMatrix = new THREE.Matrix4().set(1,0,0,-2.5, 0,1,0,-3, 0,0,1,2, 0,0,0,1);
 var legFRFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legFRMatrix);
+var pawFRMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-1, 0,0,1,0, 0,0,0,1);
+var pawFRFinalMatrix = new THREE.Matrix4().multiplyMatrices(legFRFinalMatrix,pawFRMatrix);
 
 var legRLMatrix = new THREE.Matrix4().set(1,0,0,2.5, 0,1,0,-3, 0,0,1,-2, 0,0,0,1);
 var legRLFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legRLMatrix);
+var pawRLMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-1, 0,0,1,0, 0,0,0,1);
+var pawRLFinalMatrix = new THREE.Matrix4().multiplyMatrices(legRLFinalMatrix,pawRLMatrix);
 
 var legRRMatrix = new THREE.Matrix4().set(1,0,0,-2.5, 0,1,0,-3, 0,0,1,-2, 0,0,0,1);
 var legRRFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,legRRMatrix);
-
+var pawRRMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-1, 0,0,1,0, 0,0,0,1);
+var pawRRFinalMatrix = new THREE.Matrix4().multiplyMatrices(legRRFinalMatrix,pawRRMatrix);
 
 
 // CREATE BODY
@@ -168,14 +174,23 @@ scene.add(pawFL);
 var legFR = new THREE.Mesh(legGeometry,normalMaterial);
 legFR.setMatrix(legFRFinalMatrix);
 scene.add(legFR);
+var pawFR = new THREE.Mesh(pawGeometry,normalMaterial);
+pawFR.setMatrix(pawFRFinalMatrix);
+scene.add(pawFR);
 
 var legRL = new THREE.Mesh(legGeometry,normalMaterial);
 legRL.setMatrix(legRLFinalMatrix);
 scene.add(legRL);
+var pawRL = new THREE.Mesh(pawGeometry,normalMaterial);
+pawRL.setMatrix(pawRLFinalMatrix);
+scene.add(pawRL);
 
 var legRR = new THREE.Mesh(legGeometry,normalMaterial);
 legRR.setMatrix(legRRFinalMatrix);
 scene.add(legRR);
+var pawRR = new THREE.Mesh(pawGeometry,normalMaterial);
+pawRR.setMatrix(pawRRFinalMatrix);
+scene.add(pawRR);
 
 // APPLY DIFFERENT JUMP CUTS/ANIMATIONS TO DIFFERNET KEYS
 // Note: The start of "U" animation has been done for you, you must implement the hiearchy and jumpcut.
@@ -238,17 +253,24 @@ function updateBody() {
       tail.setMatrix(tailRotMatrix);
 
       var legFLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFLMatrix);
-      legFLRotMatrix = new THREE.Matrix4().multiplyMatrices(legFLRotMatrix,rotateZ);
       legFL.setMatrix(legFLRotMatrix);
+      var pawFLRotMatrix = new THREE.Matrix4().multiplyMatrices(legFLRotMatrix,pawFLMatrix);
+      pawFL.setMatrix(pawFLRotMatrix);
 
       var legFRRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFRMatrix);
       legFR.setMatrix(legFRRotMatrix);
+      var pawFRRotMatrix = new THREE.Matrix4().multiplyMatrices(legFRRotMatrix,pawFRMatrix);
+      pawFR.setMatrix(pawFRRotMatrix);
 
       var legRLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legRLMatrix);
       legRL.setMatrix(legRLRotMatrix);
+      var pawRLRotMatrix = new THREE.Matrix4().multiplyMatrices(legRLRotMatrix,pawRLMatrix);
+      pawRL.setMatrix(pawRLRotMatrix);
 
       var legRRRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legRRMatrix);
       legRR.setMatrix(legRRRotMatrix);
+      var pawRRRotMatrix = new THREE.Matrix4().multiplyMatrices(legRRRotMatrix,pawRRMatrix);
+      pawRR.setMatrix(pawRRRotMatrix);
 
     break
 
@@ -283,14 +305,23 @@ function updateBody() {
 
       var legFLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFLMatrix);
       legFL.setMatrix(legFLRotMatrix);
+      var pawFLRotMatrix = new THREE.Matrix4().multiplyMatrices(legFLRotMatrix,pawFLMatrix);
+      pawFL.setMatrix(pawFLRotMatrix);
+
       var legFRRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legFRMatrix);
       legFR.setMatrix(legFRRotMatrix);
+      var pawFRRotMatrix = new THREE.Matrix4().multiplyMatrices(legFRRotMatrix,pawFRMatrix);
+      pawFR.setMatrix(pawFRRotMatrix);
 
       var legRLRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legRLMatrix);
       legRL.setMatrix(legRLRotMatrix);
+      var pawRLRotMatrix = new THREE.Matrix4().multiplyMatrices(legRLRotMatrix,pawRLMatrix);
+      pawRL.setMatrix(pawRLRotMatrix);
 
       var legRRRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,legRRMatrix);
       legRR.setMatrix(legRRRotMatrix);
+      var pawRRRotMatrix = new THREE.Matrix4().multiplyMatrices(legRRRotMatrix,pawRRMatrix);
+      pawRR.setMatrix(pawRRRotMatrix);
     break
 
     case(key == "H" && animate): // Head turn Right
@@ -304,10 +335,15 @@ function updateBody() {
 
       p = (p1 - p0)*((time-time_start)/time_length) + p0; // current frame 
 
-      var rotateY = new THREE.Matrix4().set(Math.cos(-p), 0, -Math.sin(-p), 0, 
-                                                0,        1,      0,        0, 
-                                            Math.sin(-p), 0,  Math.cos(-p), 0,
-                                                0,        0,      0,        1);
+      var rotateY = new THREE.Matrix4().set( Math.cos(-p), 0,  Math.sin(-p), 0, 
+                                                 0,        1,      0,        0, 
+                                            -Math.sin(-p), 0,  Math.cos(-p), 0,
+                                                 0,        0,      0,        1);
+
+      var rotateYNeg = new THREE.Matrix4().set( Math.cos(-p), 0, -Math.sin(-p), 0, 
+                                                    0,        1,      0,        0, 
+                                                Math.sin(-p), 0,  Math.cos(-p), 0,
+                                                    0,        0,      0,        1);
 
       var setHeadMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,headMatrix);
 
@@ -315,6 +351,10 @@ function updateBody() {
       head.setMatrix(headRotMatrix);
       var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
       nose.setMatrix(noseRotMatrix);
+
+      var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
+      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(rotateYNeg,setTailMatrix);
+      tail.setMatrix(tailRotMatrix);
     break
 
     case(key == "G" && animate): // Head turn Left
@@ -328,10 +368,15 @@ function updateBody() {
 
       p = (p1 - p0)*((time-time_start)/time_length) + p0; // current frame 
 
-      var rotateY = new THREE.Matrix4().set( Math.cos(-p), 0, Math.sin(-p), 0, 
-                                                 0,        1,     0,        0, 
-                                            -Math.sin(-p), 0, Math.cos(-p), 0,
-                                                 0,        0,     0,        1);
+      var rotateY = new THREE.Matrix4().set( Math.cos(-p), 0, -Math.sin(-p), 0, 
+                                                 0,        1,      0,        0, 
+                                             Math.sin(-p), 0,  Math.cos(-p), 0,
+                                                 0,        0,      0,        1);
+
+      var rotateYNeg = new THREE.Matrix4().set( Math.cos(-p), 0,  Math.sin(-p), 0, 
+                                                 0,        1,      0,        0, 
+                                              -Math.sin(-p), 0,  Math.cos(-p), 0,
+                                                 0,        0,      0,        1);
 
       var setHeadMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,headMatrix);
 
@@ -339,6 +384,10 @@ function updateBody() {
       head.setMatrix(headRotMatrix);
       var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
       nose.setMatrix(noseRotMatrix);
+
+      var setTailMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,tailMatrix);
+      var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(rotateYNeg,setTailMatrix);
+      tail.setMatrix(tailRotMatrix);
     break
 
     case(key == "T" && animate): // Tail turn right
@@ -407,13 +456,13 @@ keyboard.domElement.addEventListener('keydown',function(event){
     camera.position.set(45,0,0);
     camera.lookAt(scene.position);}
   else if(keyboard.eventMatches(event,"U")){ 
-    (key == "U")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/4,1), key = "U")}  
+    (key == "U")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/4,1), key = "U")} //body up
   else if(keyboard.eventMatches(event,"D")){
-    (key == "D")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/4,1), key = "D")}
+    (key == "D")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/4,1), key = "D")} //body down
   else if(keyboard.eventMatches(event,"H")){
-    (key == "H")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/4,1), key = "H")}
+    (key == "H")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/8,1), key = "H")} //head right
   else if(keyboard.eventMatches(event,"G")){
-    (key == "G")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/4,1), key = "G")}
+    (key == "G")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/8,1), key = "G")} //head left
   else if(keyboard.eventMatches(event,"T")){
     (key == "T")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/8,1), key = "T")}
   else if(keyboard.eventMatches(event,"V")){
