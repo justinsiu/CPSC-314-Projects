@@ -86,7 +86,7 @@ var non_uniform_scale = new THREE.Matrix4().set(3,0,0,0, 0,3,0,0, 0,0,3,1.5, 0,0
 headGeometry.applyMatrix(non_uniform_scale);
 
 var noseGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,2,1, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(1,0,0,0, 0,1,0,0, 0,0,1,0.5, 0,0,0,1);
 noseGeometry.applyMatrix(non_uniform_scale);
 
 var tailGeometry = makeCube();
@@ -106,11 +106,11 @@ var non_uniform_scale = new THREE.Matrix4().set(0.25,0,0,0, 0,0.25,0,0, 0,0,1,0.
 clawGeometry.applyMatrix(non_uniform_scale);
 
 var tentLGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(0.25,0,0,0, 0,0.25,0,0, 0,0,1,0.5, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(0.125,0,0,0, 0,0.125,0,0, 0,0,1,0, 0,0,0,1);
 tentLGeometry.applyMatrix(non_uniform_scale);
 
 var tentSGeometry = makeCube();
-var non_uniform_scale = new THREE.Matrix4().set(0.25,0,0,0, 0,0.25,0,0, 0,0,0.75,0.5, 0,0,0,1);
+var non_uniform_scale = new THREE.Matrix4().set(0.125,0,0,0, 0,0.125,0,0, 0,0,0.5,0.25, 0,0,0,1);
 tentSGeometry.applyMatrix(non_uniform_scale);
 
 // MATRICES
@@ -130,7 +130,8 @@ var headFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,headMatri
 
 var noseMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-0.5, 0,0,1,3, 0,0,0,1);
 var noseFinalMatrix = new THREE.Matrix4().multiplyMatrices(headFinalMatrix,noseMatrix);
-//var tentSL1Matrix
+var tentSL1Matrix = new THREE.Matrix4().set(1,0,0,-0.125, 0,1,0,0.5, 0,0,1,1, 0,0,0,1);
+var tentSL1FinalMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSL1Matrix);
 //var tentSL2Matrix
 
 var tailMatrix = new THREE.Matrix4().set(1,0,0,0, 0,1,0,-2, 0,0,1,-4, 0,0,0,1);
@@ -213,6 +214,9 @@ scene.add(head);
 var nose = new THREE.Mesh(noseGeometry,normalMaterial);
 nose.setMatrix(noseFinalMatrix);
 scene.add(nose);
+var tentSL1 = new THREE.Mesh(tentSGeometry,normalMaterial);
+tentSL1.setMatrix(tentSL1FinalMatrix);
+scene.add(tentSL1);
 
 var tail = new THREE.Mesh(tailGeometry,normalMaterial);
 tail.setMatrix(tailFinalMatrix);
@@ -358,10 +362,10 @@ function updateBody() {
       var torsoRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoMatrix,rotateZ);
       torso.setMatrix(torsoRotMatrix); 
 
-      var headFinalMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,headMatrix);
+      var headRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,headMatrix);
       head.setMatrix(headFinalMatrix);
-      var noseFinalMatrix = new THREE.Matrix4().multiplyMatrices(headFinalMatrix,noseMatrix);
-      nose.setMatrix(noseFinalMatrix);
+      var noseRotMatrix = new THREE.Matrix4().multiplyMatrices(headRotMatrix,noseMatrix);
+      nose.setMatrix(noseRotMatrix);
 
       var tailRotMatrix = new THREE.Matrix4().multiplyMatrices(torsoRotMatrix,tailMatrix);
       tail.setMatrix(tailRotMatrix);
@@ -628,6 +632,27 @@ function updateBody() {
 
     break
 
+    case(key == "N" && animate): // Nose Fan
+      var time = clock.getElapsedTime(); // t seconds passed since the clock started.
+
+      if (time > time_end){
+        p = p1;
+        animate = false;
+        break;
+      }
+
+      p = (p1 - p0)*((time-time_start)/time_length) + p0; // current frame 
+
+      var rotateY = new THREE.Matrix4().set(1,     0,             0,        0, 
+                                            0, Math.cos(-p), -Math.sin(-p), 0, 
+                                            0, Math.sin(-p),  Math.cos(-p), 0,
+                                            0,     0,             0,        1);
+
+      var tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(noseFinalMatrix,tentSL1Matrix);
+      tentSL1RotMatrix = new THREE.Matrix4().multiplyMatrices(tentSL1RotMatrix,rotateY);
+      tentSL1.setMatrix(tentSL1RotMatrix);
+
+    break
 
       case(key == "E" && animate): // Dig
       var time = clock.getElapsedTime(); // t seconds passed since the clock started.
@@ -640,10 +665,10 @@ function updateBody() {
 
       p = (p1 - p0)*((time-time_start)/time_length) + p0; // current frame 
 
-      var rotateZ = new THREE.Matrix4().set(1,      0,            0,        0, 
-                                            0,  Math.cos(-p), Math.sin(-p), 0, 
-                                            0, -Math.sin(-p), Math.cos(-p), 0,
-                                            0,      0,            0,        1);
+      var rotateZ = new THREE.Matrix4().set(1,     0,             0,        0, 
+                                            0, Math.cos(-p), -Math.sin(-p), 0, 
+                                            0, Math.sin(-p),  Math.cos(-p), 0,
+                                            0,     0,             0,        1);
 
       var pawFLRotMatrix = new THREE.Matrix4().multiplyMatrices(pawFLFinalMatrix,rotateZ);
       pawFL.setMatrix(pawFLRotMatrix);
@@ -715,7 +740,7 @@ keyboard.domElement.addEventListener('keydown',function(event){
   else if(keyboard.eventMatches(event,"V")){
     (key == "V")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/8,1), key = "V")} //tail left
   else if(keyboard.eventMatches(event,"N")){
-    (key == "N")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/8,1), key = "N")} //nose fan
+    (key == "N")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/2,1), key = "N")} //nose fan
   else if(keyboard.eventMatches(event,"S")){
     (key == "S")? init_animation(p1,p0,time_length) : (init_animation(0,Math.PI/8,1), key = "S")} //swim
   else if(keyboard.eventMatches(event,"E")){
